@@ -65,7 +65,8 @@ function startTimer() {
 function pauseTimer() {
     running = false;
     clearInterval(timer);
-    focusSound.pause();
+
+    if (focusSound) focusSound.pause();
     breakSound.pause();
 }
 
