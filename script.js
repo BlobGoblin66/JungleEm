@@ -26,13 +26,13 @@ const resetBtn = document.getElementById("reset");
 // -------------------------
 
 const focusTracks = [
-    "audio/focus-1.mp3",
-    "audio/focus-2.mp3",
-    "audio/focus-3.mp3"
+    "audio/JUNGLE1.mp3",
+    "audio/JUNGLE2.mp3",
+    "audio/JUNGLE3.mp3"
 ];
 let focusSound = null;
-const breakSound = new Audio("audio/break-ambient.mp3");
-const chime = new Audio("audio/chime.mp3");
+const breakSound = new Audio("audio/JUNGLEBREAK.mp3");
+const chime = new Audio("audio/NewspaperPageTurn4.wav");
 
 focusSound.loop = true;
 breakSound.loop = true;
