@@ -30,11 +30,11 @@ const focusTracks = [
     "audio/JUNGLE2.mp3",
     "audio/JUNGLE3.mp3"
 ];
+
 let focusSound = null;
 const breakSound = new Audio("audio/JUNGLEBREAK.mp3");
 const chime = new Audio("audio/NewspaperPageTurn4.wav");
 
-focusSound.loop = true;
 breakSound.loop = true;
 
 // -------------------------
