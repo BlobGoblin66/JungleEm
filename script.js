@@ -73,28 +73,19 @@ source.start(now);
 // ===============================
 function fadeSound(name, targetVolume, duration = 3) {
   const sound = sounds[name];
+  if (!sound) return;
+
   const now = audioCtx.currentTime;
 
   sound.gain.gain.cancelScheduledValues(now);
 
-  // Avoid exponential ramp to zero (not allowed)
-  const safeTarget = Math.max(targetVolume, 0.001);
-
-function fadeSound(name, targetVolume, duration = 3) {
-  const sound = sounds[name];
-  const now = audioCtx.currentTime;
-
-  sound.gain.gain.cancelScheduledValues(now);
-
-  // Lock the current value to prevent jumps
+  // Lock current value to avoid jumps
   sound.gain.gain.setValueAtTime(sound.gain.gain.value, now);
 
   sound.gain.gain.linearRampToValueAtTime(
     targetVolume,
     now + duration
   );
-}
-
 }
 
 // ===============================
