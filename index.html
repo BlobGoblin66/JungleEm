@@ -2,45 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Study Timer</title>
+  <title>Jungle Study Timer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
-<div id="ambient-bg"></div>
-  
-<div id="timer">
-  <h2 id="phase">Focus</h2>
-  <h1 id="time">0:00</h1>
-  <button id="start">Start</button>
-  <button id="stop">Stop</button>
-</div>
 
-  <!-- this is the new bit under here to toggle sounds on and off-->
+  <!-- Jungle background -->
+  <div id="ambient-bg"></div>
 
+  <!-- Timer display -->
+  <div id="timer">
+    <h2 id="phase">Focus</h2>
+    <h1 id="time">0:00</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+  </div>
+
+  <!-- Sound panel -->
   <div id="sound-panel">
-  <h2>Ambience</h2>
+    <h2>Ambience</h2>
 
-  <label class="toggle">
-    <input type="checkbox" onchange="toggleSound('sound1', this.checked)">
-    <span class="slider"></span>
-    <span class="label-text">Gentle river</span>
-  </label>
-
-  <label class="toggle">
-    <input type="checkbox" onchange="toggleSound('sound2', this.checked)">
-    <span class="slider"></span>
-    <span class="label-text">Drone</span>
-  </label>
-
-  <label class="toggle">
-    <input type="checkbox" onchange="toggleSound('sound3', this.checked)">
-    <span class="slider"></span>
-    <span class="label-text">Marimba melody</span>
-  </label>
-</div>
-
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="sound-control">
+      <label class="toggle">
+        <input type="checkbox" onchange="toggleSound(
