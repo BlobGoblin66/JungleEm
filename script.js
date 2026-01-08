@@ -18,7 +18,13 @@ const sounds = {
     source: null,
     gain: audioCtx.createGain(),
     loaded: false
-  }
+  },
+  sound3: {
+    file: "audio/Melody.mp3",
+    source: null,
+    gain: audioCtx.createGain(),
+    loaded: false
+  },
 };
 
 // ===============================
@@ -40,12 +46,17 @@ async function loadSound(name) {
   const arrayBuffer = await response.arrayBuffer();
   const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
-  const source = audioCtx.createBufferSource();
-  source.buffer = audioBuffer;
-  source.loop = true;
+const source = audioCtx.createBufferSource();
+source.buffer = audioBuffer;
+source.loop = true;
 
-  source.connect(sound.gain);
-  source.start(0);
+// Ensure silence before start
+const now = audioCtx.currentTime;
+sound.gain.gain.setValueAtTime(0, now);
+
+source.connect(sound.gain);
+source.start(now);
+
 
   sound.source = source;
   sound.loaded = true;
@@ -54,13 +65,17 @@ async function loadSound(name) {
 // ===============================
 // FADE HELPERS
 // ===============================
-function fadeSound(name, targetVolume, duration = 1.5) {
+function fadeSound(name, targetVolume, duration = 3) {
   const sound = sounds[name];
   const now = audioCtx.currentTime;
 
   sound.gain.gain.cancelScheduledValues(now);
-  sound.gain.gain.linearRampToValueAtTime(
-    targetVolume,
+
+  // Avoid exponential ramp to zero (not allowed)
+  const safeTarget = Math.max(targetVolume, 0.001);
+
+  sound.gain.gain.exponentialRampToValueAtTime(
+    safeTarget,
     now + duration
   );
 }
@@ -81,7 +96,7 @@ async function toggleSound(name, on) {
     await loadSound(name);
   }
 
-  fadeSound(name, on ? 0.4 : 0);
+  fadeSound(name, on ? 0.4 : 0, 3);
 }
 
 // ===============================
