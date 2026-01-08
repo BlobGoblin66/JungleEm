@@ -1,1 +1,120 @@
-empty
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #0b0b0b;
+  color: #eee;
+  font-family: system-ui, sans-serif;
+}
+
+/* Timer styling */
+#timer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#time {
+  font-size: 4rem;
+  font-weight: 300;
+}
+
+#phase {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+button {
+  background: none;
+  border: 1px solid #444;
+  color: #eee;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+button:hover {
+  background: #222;
+}
+
+/* Sound panel */
+#sound-panel {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  background: rgba(20,20,20,0.85);
+  backdrop-filter: blur(12px);
+  padding: 1.2rem 1.5rem;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+#sound-panel h2 {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.4rem;
+}
+
+/* Toggle styling */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  display: none;
+}
+
+.slider {
+  width: 42px;
+  height: 22px;
+  background: #333;
+  border-radius: 999px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 2px;
+  background: #bbb;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.toggle input:checked + .slider {
+  background: #4caf50;
+}
+
+.toggle input:checked + .slider::before {
+  transform: translateX(20px);
+  background: #fff;
+}
+
+.label-text {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* Volume sliders */
+.sound-control input[type=range] {
+  width: 100%;
+  margin-top: 0.3rem;
+}
