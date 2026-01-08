@@ -28,12 +28,12 @@ html, body {
   text-transform: uppercase;
   opacity: 0.7;
   display: inline-block; /* needed for transform */
-  animation: breathe 2s ease-in-out infinite alternate;
+  animation: breathe 4s ease-in-out infinite alternate;
 }
 
 @keyframes breathe {
   0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
+  50%  { transform: scale(2); }
   100% { transform: scale(1); }
 }
 
