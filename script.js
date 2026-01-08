@@ -18,19 +18,6 @@ const sounds = {
     source: null,
     gain: audioCtx.createGain(),
     loaded: false
-  },
-  sound3: {
-    file: "audio/JUNGLE3.mp3",
-    source: null,
-    gain: audioCtx.createGain(),
-    loaded: false
-  },
-  sound4: {
-    file: "audio/NewspaperPageTurn4.wav",
-    source: null,
-    gain: audioCtx.createGain(),
-    loaded: false
-  }
 };
 
 // ===============================
