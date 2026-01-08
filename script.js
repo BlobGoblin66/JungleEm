@@ -113,13 +113,18 @@ function fadeAllIn(volume = 0.4) {
 
 // adding timer functionality - ctrl f for "Minimal Pomodoro timer (drop-in fix)" in chat to find section
 
-let focusDuration = 25 * 60; // 25 minutes
-let timeLeft = focusDuration;
+const FOCUS_DURATION = 25 * 60;
+const BREAK_DURATION = 5 * 60;
+
+let timeLeft = FOCUS_DURATION;
 let timerInterval = null;
+let phase = "focus"; // "focus" | "break"
 
 const timeDisplay = document.getElementById("time");
+const phaseDisplay = document.getElementById("phase");
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
+
 
 // see previous note, ctrl f for 'display update' for this section below
 
@@ -129,23 +134,39 @@ function updateTimerDisplay() {
 
   timeDisplay.textContent =
     `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+  phaseDisplay.textContent =
+    phase === "focus" ? "Focus" : "Break";
 }
 
 updateTimerDisplay();
 
+// adding phase switching logic
+
+function switchPhase() {
+  if (phase === "focus") {
+    phase = "break";
+    timeLeft = BREAK_DURATION;
+    fadeAllOut(); // silence during break
+  } else {
+    phase = "focus";
+    timeLeft = FOCUS_DURATION;
+  }
+
+  updateTimerDisplay();
+}
+
 // adding timer button ctrl f "start button (this is the missing piece)
 
 startBtn.addEventListener("click", () => {
-  if (timerInterval) return; // prevent double start
+  if (timerInterval) return;
 
   timerInterval = setInterval(() => {
     timeLeft--;
     updateTimerDisplay();
 
     if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      timerInterval = null;
-      fadeAllOut(); // calm stop
+      switchPhase();
     }
   }, 1000);
 });
@@ -153,7 +174,8 @@ startBtn.addEventListener("click", () => {
 stopBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerInterval = null;
-  timeLeft = focusDuration;
+  phase = "focus";
+  timeLeft = FOCUS_DURATION;
   updateTimerDisplay();
   fadeAllOut();
 });
