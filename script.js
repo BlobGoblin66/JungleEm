@@ -18,6 +18,7 @@ const sounds = {
     source: null,
     gain: audioCtx.createGain(),
     loaded: false
+  }
 };
 
 // ===============================
