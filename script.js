@@ -4,6 +4,12 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 // ===============================
+// NOTIFICATION SOUND
+// ===============================
+const notificationAudio = new Audio("audio/notification.mp3");
+notificationAudio.volume = 0.8;
+
+// ===============================
 // MODULAR SOUND DEFINITIONS
 // ===============================
 const sounds = {
@@ -119,7 +125,7 @@ function fadeAllIn(volume = 0.4) {
 const FOCUS_DURATION = 25 * 60;
 const BREAK_DURATION = 5 * 60;
 
-let timeLeft = FOCUS_DURATION;
+let elapsedTime = 0;
 let timerInterval = null;
 let phase = "focus"; // "focus" | "break"
 
@@ -132,8 +138,8 @@ const stopBtn = document.getElementById("stop");
 // see previous note, ctrl f for 'display update' for this section below
 
 function updateTimerDisplay() {
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
 
   timeDisplay.textContent =
     `${minutes}:${seconds.toString().padStart(2, "0")}`;
@@ -147,13 +153,16 @@ updateTimerDisplay();
 // adding phase switching logic
 
 function switchPhase() {
+  notificationAudio.currentTime = 0;
+  notificationAudio.play();
+
   if (phase === "focus") {
     phase = "break";
-    timeLeft = BREAK_DURATION;
-    fadeAllOut(); // silence during break
+    elapsedTime = 0;
+    fadeAllOut(); // silence ambience during break
   } else {
     phase = "focus";
-    timeLeft = FOCUS_DURATION;
+    elapsedTime = 0;
   }
 
   updateTimerDisplay();
@@ -165,10 +174,13 @@ startBtn.addEventListener("click", () => {
   if (timerInterval) return;
 
   timerInterval = setInterval(() => {
-    timeLeft--;
+    elapsedTime++;
     updateTimerDisplay();
 
-    if (timeLeft <= 0) {
+    if (
+      (phase === "focus" && elapsedTime >= FOCUS_DURATION) ||
+      (phase === "break" && elapsedTime >= BREAK_DURATION)
+    ) {
       switchPhase();
     }
   }, 1000);
@@ -178,7 +190,7 @@ stopBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerInterval = null;
   phase = "focus";
-  timeLeft = FOCUS_DURATION;
+  elapsedTime = 0;
   updateTimerDisplay();
   fadeAllOut();
 });
