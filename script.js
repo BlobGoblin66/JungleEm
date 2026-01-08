@@ -8,13 +8,13 @@ const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 // ===============================
 const sounds = {
   sound1: {
-    file: "audio/JUNGLE1.mp3",
+    file: "audio/RunningWater.mp3",
     source: null,
     gain: audioCtx.createGain(),
     loaded: false
   },
   sound2: {
-    file: "audio/JUNGLE2.mp3",
+    file: "audio/Drone.mp3",
     source: null,
     gain: audioCtx.createGain(),
     loaded: false
