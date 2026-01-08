@@ -80,10 +80,21 @@ function fadeSound(name, targetVolume, duration = 3) {
   // Avoid exponential ramp to zero (not allowed)
   const safeTarget = Math.max(targetVolume, 0.001);
 
-  sound.gain.gain.exponentialRampToValueAtTime(
-    safeTarget,
+function fadeSound(name, targetVolume, duration = 3) {
+  const sound = sounds[name];
+  const now = audioCtx.currentTime;
+
+  sound.gain.gain.cancelScheduledValues(now);
+
+  // Lock the current value to prevent jumps
+  sound.gain.gain.setValueAtTime(sound.gain.gain.value, now);
+
+  sound.gain.gain.linearRampToValueAtTime(
+    targetVolume,
     now + duration
   );
+}
+
 }
 
 // ===============================
