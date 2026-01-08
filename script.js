@@ -109,3 +109,52 @@ function fadeAllOut() {
 function fadeAllIn(volume = 0.4) {
   Object.keys(sounds).forEach(name => fadeSound(name, volume));
 }
+
+
+// adding timer functionality - ctrl f for "Minimal Pomodoro timer (drop-in fix)" in chat to find section
+
+let focusDuration = 25 * 60; // 25 minutes
+let timeLeft = focusDuration;
+let timerInterval = null;
+
+const timeDisplay = document.getElementById("time");
+const startBtn = document.getElementById("start");
+const stopBtn = document.getElementById("stop");
+
+// see previous note, ctrl f for 'display update' for this section below
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  timeDisplay.textContent =
+    `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+updateTimerDisplay();
+
+// adding timer button ctrl f "start button (this is the missing piece)
+
+startBtn.addEventListener("click", () => {
+  if (timerInterval) return; // prevent double start
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      fadeAllOut(); // calm stop
+    }
+  }, 1000);
+});
+
+stopBtn.addEventListener("click", () => {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timeLeft = focusDuration;
+  updateTimerDisplay();
+  fadeAllOut();
+});
+
