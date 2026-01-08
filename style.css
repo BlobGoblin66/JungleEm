@@ -12,23 +12,19 @@ html, body {
   z-index: -2;
 
   background:
-    radial-gradient(
-      circle at 20% 30%,
-      rgba(30, 60, 45, 0.9),
-      rgba(11, 11, 11, 1) 65%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(20, 40, 60, 0.6),
-      transparent 60%
-    );
-
+    radial-gradient(circle at 20% 30%, rgba(30, 60, 45, 0.9), rgba(11, 11, 11, 1) 65%),
+    radial-gradient(circle at 80% 70%, rgba(20, 40, 60, 0.6), transparent 60%);
+    
+  background-size: 150% 150%; /* makes room for drift */
   animation: jungleDrift 60s ease-in-out infinite alternate;
 }
 
 @keyframes jungleDrift {
   0% {
     background-position: 20% 30%, 80% 70%;
+  }
+  50% {
+    background-position: 40% 40%, 60% 60%;
   }
   100% {
     background-position: 70% 40%, 30% 60%;
@@ -61,20 +57,32 @@ button {
 }
 
 #timer {
-  animation: breathe 9s ease-in-out infinite;
-}
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 
-body.break #timer {
-  animation: none;
+  animation: breathe 9s ease-in-out infinite;
+  text-shadow: 0 0 4px rgba(120, 200, 160, 0.2);
 }
 
 @keyframes breathe {
   0%, 100% {
-    filter: drop-shadow(0 0 0 rgba(120, 200, 160, 0));
+    text-shadow: 0 0 4px rgba(120, 200, 160, 0.2);
+    transform: scale(1);
   }
   50% {
-    filter: drop-shadow(0 0 22px rgba(120, 200, 160, 0.12));
+    text-shadow: 0 0 22px rgba(120, 200, 160, 0.12);
+    transform: scale(1.02);
   }
+}
+
+/* Optional: stop breathing glow during break */
+body.break #timer {
+  animation: none;
 }
 
 
