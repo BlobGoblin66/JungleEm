@@ -167,6 +167,7 @@ function switchPhase() {
     elapsedTime = 0;
   }
 
+  document.body.classList.toggle("break", phase === "break");
   updateTimerDisplay();
 }
 
