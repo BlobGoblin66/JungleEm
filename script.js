@@ -162,12 +162,15 @@ function switchPhase() {
     phase = "break";
     elapsedTime = 0;
     fadeAllOut(); // silence ambience during break
+    document.body.classList.remove("focus");
+    document.body.classList.add("break");
   } else {
     phase = "focus";
     elapsedTime = 0;
+    document.body.classList.remove("break");
+    document.body.classList.add("focus");
   }
 
-  document.body.classList.toggle("break", phase === "break");
   updateTimerDisplay();
 }
 
