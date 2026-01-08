@@ -27,6 +27,14 @@ html, body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.7;
+  display: inline-block; /* needed for transform */
+  animation: breathe 2s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 button {
