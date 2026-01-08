@@ -6,6 +6,7 @@ html, body {
   font-family: system-ui, sans-serif;
 }
 
+/* Jungle gradient background */
 #ambient-bg {
   position: fixed;
   inset: 0;
@@ -15,23 +16,17 @@ html, body {
     radial-gradient(circle at 20% 30%, rgba(30, 60, 45, 0.9), rgba(11, 11, 11, 1) 65%),
     radial-gradient(circle at 80% 70%, rgba(20, 40, 60, 0.6), transparent 60%);
     
-  background-size: 150% 150%; /* makes room for drift */
+  background-size: 150% 150%;
   animation: jungleDrift 60s ease-in-out infinite alternate;
 }
 
 @keyframes jungleDrift {
-  0% {
-    background-position: 20% 30%, 80% 70%;
-  }
-  50% {
-    background-position: 40% 40%, 60% 60%;
-  }
-  100% {
-    background-position: 70% 40%, 30% 60%;
-  }
+  0% { background-position: 20% 30%, 80% 70%; }
+  50% { background-position: 40% 40%, 60% 60%; }
+  100% { background-position: 70% 40%, 30% 60%; }
 }
 
-
+/* Timer */
 #timer {
   position: fixed;
   inset: 0;
@@ -40,11 +35,29 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-}
 
-#time {
   font-size: 4rem;
   font-weight: 300;
+
+  animation: breathe 9s ease-in-out infinite;
+  text-shadow: 0 0 4px rgba(120, 200, 160, 0.2);
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); text-shadow: 0 0 4px rgba(120,200,160,0.2); }
+  50% { transform: scale(1.02); text-shadow: 0 0 22px rgba(120,200,160,0.12); }
+}
+
+/* Stop breathing animation during break */
+body.break #timer {
+  animation: none;
+}
+
+#phase {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
 }
 
 button {
@@ -56,36 +69,11 @@ button {
   border-radius: 6px;
 }
 
-#timer {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-
-  animation: breathe 9s ease-in-out infinite;
-  text-shadow: 0 0 4px rgba(120, 200, 160, 0.2);
+button:hover {
+  background: #222;
 }
 
-@keyframes breathe {
-  0%, 100% {
-    text-shadow: 0 0 4px rgba(120, 200, 160, 0.2);
-    transform: scale(1);
-  }
-  50% {
-    text-shadow: 0 0 22px rgba(120, 200, 160, 0.12);
-    transform: scale(1.02);
-  }
-}
-
-/* Optional: stop breathing glow during break */
-body.break #timer {
-  animation: none;
-}
-
-
+/* Sound panel */
 #sound-panel {
   position: fixed;
   bottom: 2rem;
@@ -111,6 +99,7 @@ body.break #timer {
   margin-bottom: 0.4rem;
 }
 
+/* Toggle switch */
 .toggle {
   display: flex;
   align-items: center;
@@ -123,7 +112,6 @@ body.break #timer {
   display: none;
 }
 
-/* The switch */
 .slider {
   width: 42px;
   height: 22px;
@@ -133,7 +121,6 @@ body.break #timer {
   transition: background 0.3s ease;
 }
 
-/* Knob */
 .slider::before {
   content: "";
   position: absolute;
@@ -146,7 +133,6 @@ body.break #timer {
   transition: transform 0.3s ease, background 0.3s ease;
 }
 
-/* Checked state */
 .toggle input:checked + .slider {
   background: #4caf50;
 }
@@ -161,15 +147,10 @@ body.break #timer {
   opacity: 0.85;
 }
 
-
-#phase {
-  font-size: 1.5rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-
-button:hover {
-  background: #222;
+/* Volume slider styling */
+.sound-control input[type="range"] {
+  width: 100%;
+  margin-top: 0.2rem;
+  accent-color: #4caf50;
+  cursor: pointer;
 }
