@@ -154,3 +154,23 @@ button:hover {
   accent-color: #4caf50;
   cursor: pointer;
 }
+
+.sound-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sound-control input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #4caf50;
+}
+
+function setVolume(name, value) {
+  const s = sounds[name];
+  if (!s) return;
+  s.gain.gain.setValueAtTime(parseFloat(value), audioCtx.currentTime);
+}
+
+
