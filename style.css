@@ -28,7 +28,7 @@ html, body {
   text-transform: uppercase;
   opacity: 0.7;
   display: inline-block; /* needed for transform */
-  animation: breathe 4s ease-in-out infinite alternate;
+  animation: breathe 9s ease-in-out infinite alternate;
 }
 
 @keyframes breathe {
@@ -108,7 +108,7 @@ button:hover {
 }
 
 .toggle input:checked + .slider {
-  background: #4caf50;
+  background: #f7769B;
 }
 
 .toggle input:checked + .slider::before {
