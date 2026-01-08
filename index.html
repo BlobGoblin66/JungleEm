@@ -13,6 +13,19 @@
     <button id="stop">Stop</button>
   </div>
 
+  <!-- this is the new bit under here to toggle sounds on and off-->
+  
+  <div id="sounds">
+  <label>
+    <input type="checkbox" onchange="toggleSound('sound1', this.checked)">
+    Rain
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggleSound('sound2', this.checked)">
+    Piano
+  </label>
+</div>
+
   <script src="script.js"></script>
 </body>
 </html>
