@@ -6,6 +6,36 @@ html, body {
   font-family: system-ui, sans-serif;
 }
 
+#ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(30, 60, 45, 0.9),
+      rgba(11, 11, 11, 1) 65%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(20, 40, 60, 0.6),
+      transparent 60%
+    );
+
+  animation: jungleDrift 60s ease-in-out infinite alternate;
+}
+
+@keyframes jungleDrift {
+  0% {
+    background-position: 20% 30%, 80% 70%;
+  }
+  100% {
+    background-position: 70% 40%, 30% 60%;
+  }
+}
+
+
 #timer {
   position: fixed;
   inset: 0;
@@ -29,6 +59,24 @@ button {
   cursor: pointer;
   border-radius: 6px;
 }
+
+#timer {
+  animation: breathe 9s ease-in-out infinite;
+}
+
+body.break #timer {
+  animation: none;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    filter: drop-shadow(0 0 0 rgba(120, 200, 160, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(120, 200, 160, 0.12));
+  }
+}
+
 
 #sound-panel {
   position: fixed;
