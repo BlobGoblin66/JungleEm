@@ -45,6 +45,13 @@ button {
   cursor: pointer;
 }
 
+#phase {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
 
 button:hover {
   background: #222;
