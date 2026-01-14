@@ -5,7 +5,7 @@ html, body {
   background: linear-gradient(135deg, #654c52, #704a4c, #b99099, #654c52);
   background-size: 400% 400%;
   color: #eee;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Faculty Glyphic', sans-serif;
   /* This starts the "breathing" movement */
   animation: gradientFlow 15s ease infinite;
   overflow: hidden; /* Prevents scrollbars if the gradient shifts */
@@ -49,6 +49,9 @@ html, body {
 #time {
   font-size: 4rem;
   font-weight: 300;
+  /* Adds a soft glow to the numbers so they are readable over the moving gradient */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 #phase {
@@ -106,20 +109,23 @@ button:hover {
   bottom: 2rem;
   left: 2rem;
   background: rgba(247, 228, 215, 1);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
   padding: 1.2rem 1.5rem;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   box-shadow: 0 10px 30px rgba(222, 178, 149, 1);
+  z-index: 100;
+  color: #4a3f35;
 }
 
 #sound-panel h2 {
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.6;
+  color: #6d5d50; 
+  opacity: 0.8;
   margin-bottom: 0.4rem;
 }
 
@@ -130,6 +136,7 @@ button:hover {
   gap: 0.75rem;
   cursor: pointer;
   user-select: none;
+  color: #4a3f35;
 }
 
 .toggle input {
@@ -139,7 +146,7 @@ button:hover {
 .slider {
   width: 42px;
   height: 22px;
-  background: #333;
+  background: #d1c1b5; 
   border-radius: 999px;
   position: relative;
   transition: background 0.3s ease;
@@ -152,7 +159,7 @@ button:hover {
   height: 18px;
   left: 2px;
   top: 2px;
-  background: #bbb;
+  background: #fff; 
   border-radius: 50%;
   transition: transform 0.3s ease, background 0.3s ease;
 }
@@ -188,3 +195,38 @@ body.break-mode {
   background-size: 400% 400%;
 }
 
+/* Custom Volume Slider Styling */
+.sound-control input[type=range] {
+  -webkit-appearance: none; /* Removes default browser styling */
+  width: 100%;
+  background: transparent;
+  margin-top: 0.3rem;
+}
+
+/* The Track (The horizontal line) */
+.sound-control input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #d1c1b5; /* Soft brown to match your panel */
+  border-radius: 3px;
+}
+
+/* The Thumb (The circle handle) */
+.sound-control input[type=range]::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #f7769B; /* Pink to match your toggle buttons */
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5px; /* Centers the thumb on the track */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+/* Hover effect on the handle */
+.sound-control input[type=range]:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: #ff8fb0; /* Slightly brighter pink on hover */
+}
