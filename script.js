@@ -107,29 +107,33 @@ document.querySelectorAll(".mode-selector button").forEach(button => {
     workMinutes = Number(button.dataset.work);
     breakMinutes = Number(button.dataset.break);
 
-    // Reset timer when switching modes
     isWorkSession = true;
     timeRemaining = workMinutes * 60;
     clearInterval(timerInterval);
     timerInterval = null;
 
+    document
+      .querySelectorAll(".mode-selector button")
+      .forEach(b => b.classList.remove("active"));
+
+    button.classList.add("active");
+
     updateDisplay();
   });
 });
 
+
 document.getElementById("start").addEventListener("click", () => {
   if (timerInterval) return;
 
-  timerInterval = setInterval(() => {
-    timeRemaining--;
+timerInterval = setInterval(() => {
+  if (--timeRemaining <= 0) {
+    isWorkSession = !isWorkSession;
+    timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
+  }
 
-    if (timeRemaining <= 0) {
-      isWorkSession = !isWorkSession;
-      timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
-    }
-
-    updateDisplay();
-  }, 1000);
+  updateDisplay();
+}, 1000);
 });
 
 updateDisplay();
