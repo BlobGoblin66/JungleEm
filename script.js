@@ -104,6 +104,8 @@ function updateDisplay() {
 
 document.querySelectorAll(".mode-selector button").forEach(button => {
   button.addEventListener("click", () => {
+    console.log("Mode button clicked:", button.dataset.work);
+
     workMinutes = Number(button.dataset.work);
     breakMinutes = Number(button.dataset.break);
 
@@ -111,12 +113,6 @@ document.querySelectorAll(".mode-selector button").forEach(button => {
     timeRemaining = workMinutes * 60;
     clearInterval(timerInterval);
     timerInterval = null;
-
-    document
-      .querySelectorAll(".mode-selector button")
-      .forEach(b => b.classList.remove("active"));
-
-    button.classList.add("active");
 
     updateDisplay();
   });
