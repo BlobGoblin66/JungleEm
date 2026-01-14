@@ -154,10 +154,20 @@ document.getElementById("start").addEventListener("click", () => {
 });
 
 document.getElementById("stop").addEventListener("click", () => {
+  // 1. Stop the clock
   clearInterval(timerInterval);
   timerInterval = null;
-  // Reset time to the start of the current session type
+
+  // 2. Reset the time display
   timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
   updateDisplay();
+
+  // 3. Fade out the audio engine
   fadeAllOut();
+
+  // 4. NEW: Find all checkboxes and uncheck them
+  const toggles = document.querySelectorAll('#sound-panel input[type="checkbox"]');
+  toggles.forEach(checkbox => {
+    checkbox.checked = false;
+  });
 });
