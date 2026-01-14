@@ -6,7 +6,18 @@ html, body {
   font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Timer styling */
+/* 1. POSITION THE MODE SELECTOR AT THE TOP */
+.mode-selector {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100; /* Keeps it above the timer box */
+  display: flex;
+  gap: 1rem;
+}
+
+/* 2. TIMER BOX FIX */
 #timer {
   position: fixed;
   inset: 0;
@@ -15,6 +26,12 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  pointer-events: none; /* Allows clicks to pass through to buttons behind it */
+}
+
+/* Re-enable clicking for things inside the timer */
+#timer button, #time, #phase {
+  pointer-events: auto;
 }
 
 #time {
@@ -27,16 +44,17 @@ html, body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.7;
-  display: inline-block; /* needed for transform */
+  display: inline-block;
   animation: breathe 9s ease-in-out infinite alternate;
 }
 
 @keyframes breathe {
   0%   { transform: scale(1); }
-  50%  { transform: scale(2); }
+  50%  { transform: scale(1.1); } /* Reduced to 1.1 so it doesn't cover buttons */
   100% { transform: scale(1); }
 }
 
+/* 3. BUTTON STYLING & GLOW */
 button {
   background: none;
   border: 1px solid #444;
@@ -44,12 +62,22 @@ button {
   padding: 0.5rem 1.2rem;
   cursor: pointer;
   border-radius: 6px;
+  transition: all 0.3s ease; /* Makes the glow/color change smooth */
 }
 
 button:hover {
   background: #222;
+  border-color: #666;
+  transform: translateY(-2px);
 }
 
+/* This is the glow effect when a mode is selected */
+.mode-selector button.active {
+  background: #f7769B;
+  color: white;
+  border-color: #f7769B;
+  box-shadow: 0 0 20px rgba(247, 118, 155, 0.5);
+}
 /* Sound panel */
 #sound-panel {
   position: fixed;
