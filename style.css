@@ -111,7 +111,6 @@ button:hover {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  /* background: #f7e4d7; /* Solid beige, add back in if glass look doesn't work*/
   background: rgba(247, 228, 215, 0.4); /* Changed from 1 to 0.6 */
   backdrop-filter: blur(15px); /* Blurs the moving gradient behind the panel */
   border: 1px solid rgba(255, 255, 255, 0.3); /* Thin white "glass" edge */
@@ -123,6 +122,16 @@ button:hover {
   box-shadow: 0 10px 30px rgba(180, 140, 110, 0.3);
   z-index: 100;
   color: #5d4a3e; /* Dark Coffee Brown text */
+}
+
+/* Add this to the #sound-panel */
+#sound-panel {
+  animation: floatPanel 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatPanel {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
 }
 
 #sound-panel h2 {
