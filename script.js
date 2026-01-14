@@ -102,19 +102,21 @@ function updateDisplay() {
     `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-document.querySelectorAll(".mode-selector button").forEach(button => {
-  button.addEventListener("click", () => {
-    console.log("Mode button clicked:", button.dataset.work);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".mode-selector button").forEach(button => {
+    button.addEventListener("click", () => {
+      console.log("Mode button clicked:", button.dataset.work);
 
-    workMinutes = Number(button.dataset.work);
-    breakMinutes = Number(button.dataset.break);
+      workMinutes = Number(button.dataset.work);
+      breakMinutes = Number(button.dataset.break);
 
-    isWorkSession = true;
-    timeRemaining = workMinutes * 60;
-    clearInterval(timerInterval);
-    timerInterval = null;
+      isWorkSession = true;
+      timeRemaining = workMinutes * 60;
+      clearInterval(timerInterval);
+      timerInterval = null;
 
-    updateDisplay();
+      updateDisplay();
+    });
   });
 });
 
