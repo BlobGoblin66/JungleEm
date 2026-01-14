@@ -97,7 +97,14 @@ const phaseEl = document.getElementById("phase");
 function updateDisplay() {
   const minutes = Math.floor(timeRemaining / 60);
   const seconds = timeRemaining % 60;
-  timeEl.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  const timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+  // 1. Update the time on the actual webpage
+  timeEl.textContent = timeString;
+
+  // 2. NEW LINE: Update the text in the browser tab
+  document.title = `(${timeString}) Study Timer`;
+  
 }
 
 // Ensure the screen shows 25:00 immediately when the page loads
@@ -125,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 3. Reset the timer to the new start time
       isWorkSession = true;
       phaseEl.textContent = "Focus";
+      document.body.classList.remove("break-mode");
       timeRemaining = workMinutes * 60;
       
       // 4. Stop any running timer so it doesn't act weird
@@ -145,7 +153,14 @@ document.getElementById("start").addEventListener("click", () => {
     if (timeRemaining < 0) {
       notificationAudio.play();
       isWorkSession = !isWorkSession;
-      phaseEl.textContent = isWorkSession ? "Focus" : "Break";
+    if (isWorkSession) {
+          document.body.classList.remove("break-mode");
+          phaseEl.textContent = "Focus";
+      } else {
+          document.body.classList.add("break-mode");
+          phaseEl.textContent = "Break";
+      }
+
       timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
     }
 
@@ -157,6 +172,7 @@ document.getElementById("stop").addEventListener("click", () => {
   // 1. Stop the clock
   clearInterval(timerInterval);
   timerInterval = null;
+  document.body.classList.remove("break-mode");
 
   // 2. Reset the time display
   timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
