@@ -2,7 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   /* This creates a large 400% size gradient */
-  background: linear-gradient(135deg, #200808, #330F0F, #451616, #200808);
+  background: linear-gradient(135deg, #654c52, #704a4c, #b99099, #654c52);
   background-size: 400% 400%;
   color: #eee;
   font-family: 'Space Grotesk', sans-serif;
