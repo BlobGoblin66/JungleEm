@@ -111,8 +111,10 @@ button:hover {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  background: #f7e4d7; /* Solid beige */
-  backdrop-filter: blur(12px);
+  /* background: #f7e4d7; /* Solid beige, add back in if glass look doesn't work*/
+  background: rgba(247, 228, 215, 0.6); /* Changed from 1 to 0.6 */
+  backdrop-filter: blur(15px); /* Blurs the moving gradient behind the panel */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Thin white "glass" edge */
   padding: 1.2rem 1.5rem;
   border-radius: 14px;
   display: flex;
