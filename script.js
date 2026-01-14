@@ -91,12 +91,14 @@ let isWorkSession = true;
 let timeRemaining = workMinutes * 60;
 let timerInterval = null;
 
-const timerDisplay = document.getElementById("timer");
+const timeEl = document.getElementById("time");
+
+const phaseEl = document.getElementById("phase");
 
 function updateDisplay() {
   const minutes = Math.floor(timeRemaining / 60);
   const seconds = timeRemaining % 60;
-  timerDisplay.textContent =
+  timeEl.textContent =
     `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
