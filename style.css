@@ -4,7 +4,7 @@ html, body {
   /* This creates a large 400% size gradient */
   background: linear-gradient(135deg, #654c52, #704a4c, #b99099, #654c52);
   background-size: 400% 400%;
-  color: #eee;
+  color: #f7e4d7;
   font-family: 'Faculty Glyphic', sans-serif;
   /* This starts the "breathing" movement */
   animation: gradientFlow 15s ease infinite;
@@ -51,7 +51,7 @@ html, body {
   font-weight: 300;
   /* Adds a soft glow to the numbers so they are readable over the moving gradient */
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: #f7e4d7;
 }
 
 #phase {
@@ -84,7 +84,7 @@ button {
 /* Hover effect for all buttons */
 button:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #f7769B; /* Glow color on hover */
+  border-color: #f7e4d7; /* Glow color on hover */
   box-shadow: 0 0 15px rgba(247, 118, 155, 0.3);
   transform: translateY(-2px);
 }
@@ -97,9 +97,9 @@ button:hover {
 
 /* Keep your active mode button glow as it was */
 .mode-selector button.active {
-  background: #f7769B;
+  background: #5d4a3e;
   color: white;
-  border-color: #f7769B;
+  border-color: #9e8778;
   box-shadow: 0 0 20px rgba(247, 118, 155, 0.5);
 }
 
