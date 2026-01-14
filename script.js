@@ -83,7 +83,7 @@ function setVolume(name, value) {
 function fadeAllOut() { Object.keys(sounds).forEach(name => fadeSound(name, 0)); }
 
 // ===============================
-// TIMER
+// TIMER LOGIC
 // ===============================
 let workMinutes = 25;
 let breakMinutes = 5;
@@ -92,26 +92,42 @@ let timeRemaining = workMinutes * 60;
 let timerInterval = null;
 
 const timeEl = document.getElementById("time");
-
 const phaseEl = document.getElementById("phase");
 
 function updateDisplay() {
   const minutes = Math.floor(timeRemaining / 60);
   const seconds = timeRemaining % 60;
-  timeEl.textContent =
-    `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  timeEl.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".mode-selector button").forEach(button => {
-    button.addEventListener("click", () => {
-      console.log("Mode button clicked:", button.dataset.work);
+// Ensure the screen shows 25:00 immediately when the page loads
+updateDisplay();
 
+// ===============================
+// BUTTON CLICK HANDLERS
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const modeButtons = document.querySelectorAll(".mode-selector button");
+
+  // Highlight the default button (25/5)
+  modeButtons[0].classList.add("active");
+
+  modeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // 1. Visual change: Move the glow to the clicked button
+      modeButtons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      // 2. Logic change: Update the minutes based on the button's data tags
       workMinutes = Number(button.dataset.work);
       breakMinutes = Number(button.dataset.break);
 
+      // 3. Reset the timer to the new start time
       isWorkSession = true;
+      phaseEl.textContent = "Focus";
       timeRemaining = workMinutes * 60;
+      
+      // 4. Stop any running timer so it doesn't act weird
       clearInterval(timerInterval);
       timerInterval = null;
 
@@ -120,29 +136,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 document.getElementById("start").addEventListener("click", () => {
-  if (timerInterval) return;
+  if (timerInterval) return; // Prevent multiple timers running at once
 
-timerInterval = setInterval(() => {
-  if (--timeRemaining <= 0) {
-    isWorkSession = !isWorkSession;
-    timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
-  }
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+    
+    if (timeRemaining < 0) {
+      notificationAudio.play();
+      isWorkSession = !isWorkSession;
+      phaseEl.textContent = isWorkSession ? "Focus" : "Break";
+      timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
+    }
 
-  updateDisplay();
-}, 1000);
+    updateDisplay();
+  }, 1000);
 });
-
-updateDisplay();
 
 document.getElementById("stop").addEventListener("click", () => {
   clearInterval(timerInterval);
   timerInterval = null;
-
+  // Reset time to the start of the current session type
   timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
   updateDisplay();
-
   fadeAllOut();
 });
-
