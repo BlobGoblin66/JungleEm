@@ -83,9 +83,9 @@ button {
 
 /* Hover effect for all buttons */
 button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(158, 135, 120, 0.5);
   border-color: #f7e4d7; /* Glow color on hover */
-  box-shadow: 0 0 15px rgba(247, 118, 155, 0.3);
+  box-shadow: 0 0 15px rgba(158, 135, 120, 1);
   transform: translateY(-2px);
 }
 
