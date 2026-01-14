@@ -1,9 +1,21 @@
 html, body {
   height: 100%;
   margin: 0;
-  background: #0b0b0b;
+  /* This creates a large 400% size gradient */
+  background: linear-gradient(135deg, #0b0b0b, #1a1a2e, #16213e, #0b0b0b);
+  background-size: 400% 400%;
   color: #eee;
   font-family: 'Space Grotesk', sans-serif;
+  /* This starts the "breathing" movement */
+  animation: gradientFlow 15s ease infinite;
+  overflow: hidden; /* Prevents scrollbars if the gradient shifts */
+}
+
+/* This defines the movement of the gradient */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* 1. POSITION THE MODE SELECTOR AT THE TOP */
@@ -168,5 +180,11 @@ button:hover {
 .mode-selector button.active {
   background: white;
   color: black;
+}
+
+/* This class will be added by JavaScript during breaks */
+body.break-mode {
+  background: linear-gradient(135deg, #0b1a1a, #0e2e2e, #0b1a1a);
+  background-size: 400% 400%;
 }
 
