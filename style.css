@@ -162,9 +162,9 @@ button:hover {
   transition: transform 0.3s ease;
 }
 
-/* Changes pill to Pink when active */
+/* Changes pill to brown when active */
 .toggle input:checked + .slider {
-  background: #f7769B; 
+  background: #5d4a3e; 
 }
 
 .toggle input:checked + .slider::before {
@@ -200,7 +200,7 @@ button:hover {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: #f7769B;
+  background: #5d4a3e;
   cursor: pointer;
   margin-top: -6px; /* Centering */
   border: 2px solid #fff; /* White ring for contrast */
@@ -213,7 +213,7 @@ button:hover {
   height: 14px;
   width: 14px;
   border-radius: 50%;
-  background: #f7769B;
+  background: #5d4a3e; 
   cursor: pointer;
   border: 2px solid #fff;
 }
