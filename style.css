@@ -103,50 +103,50 @@ button:hover {
   box-shadow: 0 0 20px rgba(247, 118, 155, 0.5);
 }
 
-/* Sound panel */
+/* =========================================
+   SOUND PANEL - FULL THEME
+   ========================================= */
+
 #sound-panel {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  background: rgba(247, 228, 215, 1);
+  background: #f7e4d7; /* Solid beige */
   backdrop-filter: blur(12px);
   padding: 1.2rem 1.5rem;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  box-shadow: 0 10px 30px rgba(222, 178, 149, 1);
+  box-shadow: 0 10px 30px rgba(180, 140, 110, 0.3);
   z-index: 100;
-  color: #4a3f35;
+  color: #5d4a3e; /* Dark Coffee Brown text */
 }
 
 #sound-panel h2 {
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #6d5d50; 
-  opacity: 0.8;
+  color: #5d4a3e;
   margin-bottom: 0.4rem;
 }
 
-/* Toggle styling */
+/* 1. TOGGLES (The on/off pills) */
 .toggle {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   cursor: pointer;
   user-select: none;
-  color: #4a3f35;
+  color: #5d4a3e;
 }
 
-.toggle input {
-  display: none;
-}
+.toggle input { display: none; }
 
 .slider {
   width: 42px;
   height: 22px;
-  background: #d1c1b5; 
+  background: #d1c1b5; /* Muted brown track */
   border-radius: 999px;
   position: relative;
   transition: background 0.3s ease;
@@ -155,78 +155,77 @@ button:hover {
 .slider::before {
   content: "";
   position: absolute;
-  width: 18px;
-  height: 18px;
-  left: 2px;
-  top: 2px;
+  width: 18px; height: 18px;
+  left: 2px; top: 2px;
   background: #fff; 
   border-radius: 50%;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
+/* Changes pill to Pink when active */
 .toggle input:checked + .slider {
-  background: #654c52;
+  background: #f7769B; 
 }
 
 .toggle input:checked + .slider::before {
   transform: translateX(20px);
-  background: #fff;
 }
 
 .label-text {
   font-size: 0.95rem;
-  opacity: 0.85;
+  color: #5d4a3e; /* Ensuring labels are dark brown */
 }
 
-/* Volume sliders */
+/* 2. VOLUME SLIDERS (The horizontal bars) */
 .sound-control input[type=range] {
-  width: 100%;
-  margin-top: 0.3rem;
-}
-
-.mode-selector button.active {
-  background: white;
-  color: black;
-}
-
-/* This class will be added by JavaScript during breaks */
-body.break-mode {
-  background: linear-gradient(135deg, #0b1a1a, #0e2e2e, #0b1a1a);
-  background-size: 400% 400%;
-}
-
-/* Custom Volume Slider Styling */
-.sound-control input[type=range] {
-  -webkit-appearance: none; /* Removes default browser styling */
+  -webkit-appearance: none; 
+  appearance: none;
   width: 100%;
   background: transparent;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
 }
 
-/* The Track (The horizontal line) */
+/* The horizontal line */
 .sound-control input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 6px;
-  cursor: pointer;
-  background: #d1c1b5; /* Soft brown to match your panel */
-  border-radius: 3px;
+  height: 4px;
+  background: #d1c1b5;
+  border-radius: 2px;
 }
 
-/* The Thumb (The circle handle) */
+/* The pink circle handle for Chrome/Safari/Edge */
 .sound-control input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: #f7769B; /* Pink to match your toggle buttons */
+  background: #f7769B;
   cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -5px; /* Centers the thumb on the track */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: -6px; /* Centering */
+  border: 2px solid #fff; /* White ring for contrast */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
 }
 
-/* Hover effect on the handle */
+/* The pink circle handle for Firefox */
+.sound-control input[type=range]::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #f7769B;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
 .sound-control input[type=range]:hover::-webkit-slider-thumb {
   transform: scale(1.2);
-  background: #ff8fb0; /* Slightly brighter pink on hover */
+}
+
+/* =========================================
+   BREAK MODE BACKGROUND
+   ========================================= */
+body.break-mode {
+  background: linear-gradient(135deg, #0b1a1a, #0e2e2e, #0b1a1a) !important;
+  background-size: 400% 400% !important;
 }
