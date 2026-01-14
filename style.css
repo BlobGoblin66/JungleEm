@@ -165,7 +165,7 @@ button:hover {
 }
 
 .toggle input:checked + .slider {
-  background: #f7769B;
+  background: #654c52;
 }
 
 .toggle input:checked + .slider::before {
