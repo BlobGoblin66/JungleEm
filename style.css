@@ -126,3 +126,9 @@ button:hover {
   width: 100%;
   margin-top: 0.3rem;
 }
+
+.mode-selector button.active {
+  background: white;
+  color: black;
+}
+
