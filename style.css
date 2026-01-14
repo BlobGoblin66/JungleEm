@@ -105,14 +105,14 @@ button:hover {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  background: rgba(20,20,20,0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(247, 228, 215, 1);
+  backdrop-filter: blur(20px);
   padding: 1.2rem 1.5rem;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 30px rgba(222, 178, 149, 1);
 }
 
 #sound-panel h2 {
