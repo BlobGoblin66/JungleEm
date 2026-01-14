@@ -85,57 +85,49 @@ function fadeAllOut() { Object.keys(sounds).forEach(name => fadeSound(name, 0));
 // ===============================
 // TIMER
 // ===============================
-const FOCUS_DURATION = 25 * 60;
-const BREAK_DURATION = 5 * 60;
-
-let elapsedTime = 0;
+let workMinutes = 25;
+let breakMinutes = 5;
+let isWorkSession = true;
+let timeRemaining = workMinutes * 60;
 let timerInterval = null;
-let phase = "focus"; // focus | break
 
-const timeDisplay = document.getElementById("time");
-const phaseDisplay = document.getElementById("phase");
-const startBtn = document.getElementById("start");
-const stopBtn = document.getElementById("stop");
+const timerDisplay = document.getElementById("timer");
 
-function updateTimerDisplay() {
-  const minutes = Math.floor(elapsedTime / 60);
-  const seconds = elapsedTime % 60;
-  timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2,"0")}`;
-  phaseDisplay.textContent = phase === "focus" ? "Focus" : "Break";
+function updateDisplay() {
+  const minutes = Math.floor(timeRemaining / 60);
+  const seconds = timeRemaining % 60;
+  timerDisplay.textContent =
+    `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-function switchPhase() {
-  notificationAudio.currentTime = 0;
-  notificationAudio.play();
+document.querySelectorAll(".mode-selector button").forEach(button => {
+  button.addEventListener("click", () => {
+    workMinutes = Number(button.dataset.work);
+    breakMinutes = Number(button.dataset.break);
 
-  if (phase === "focus") {
-    phase = "break";
-    elapsedTime = 0;
-    fadeAllOut();
-  } else {
-    phase = "focus";
-    elapsedTime = 0;
-  }
+    // Reset timer when switching modes
+    isWorkSession = true;
+    timeRemaining = workMinutes * 60;
+    clearInterval(timerInterval);
+    timerInterval = null;
 
-  updateTimerDisplay();
-}
+    updateDisplay();
+  });
+});
 
-startBtn.addEventListener("click", () => {
+document.getElementById("start").addEventListener("click", () => {
   if (timerInterval) return;
+
   timerInterval = setInterval(() => {
-    elapsedTime++;
-    updateTimerDisplay();
-    if ((phase==="focus" && elapsedTime>=FOCUS_DURATION) || (phase==="break" && elapsedTime>=BREAK_DURATION)) {
-      switchPhase();
+    timeRemaining--;
+
+    if (timeRemaining <= 0) {
+      isWorkSession = !isWorkSession;
+      timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
     }
-  },1000);
+
+    updateDisplay();
+  }, 1000);
 });
 
-stopBtn.addEventListener("click", () => {
-  clearInterval(timerInterval);
-  timerInterval = null;
-  phase = "focus";
-  elapsedTime = 0;
-  updateTimerDisplay();
-  fadeAllOut();
-});
+updateDisplay();
