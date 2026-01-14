@@ -133,3 +133,14 @@ document.getElementById("start").addEventListener("click", () => {
 });
 
 updateDisplay();
+
+document.getElementById("stop").addEventListener("click", () => {
+  clearInterval(timerInterval);
+  timerInterval = null;
+
+  timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
+  updateDisplay();
+
+  fadeAllOut();
+});
+
