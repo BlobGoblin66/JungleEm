@@ -174,7 +174,7 @@ button:hover {
 
 .label-text {
   font-size: 0.95rem;
-  color: #5d4a3e; /* Ensuring labels are dark brown */
+  color: #d1c1b5; /* CHANGEd THIS */
 }
 
 /* 2. VOLUME SLIDERS (The horizontal bars) */
