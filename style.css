@@ -121,7 +121,7 @@ button:hover {
   gap: 0.8rem;
   box-shadow: 0 10px 30px rgba(180, 140, 110, 0.3);
   z-index: 100;
-  color: #5d4a3e; /* Dark Coffee Brown text */
+  color: #d1c1b5; /* cream text */
 }
 
 #sound-panel h2 {
