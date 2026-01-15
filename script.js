@@ -16,7 +16,7 @@ const sounds = {
   sound1: { file: "audio/RunningWater.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound2: { file: "audio/Drone.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound3: { file: "audio/Melody.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
-  sound4: { file: "audio/JUNGLEBUGS.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
+  sound4: { file: "audio/JungleBugs.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound5: { file: "audio/UNDERWATER.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound6: { file: "audio/WETROAD.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
 };
