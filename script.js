@@ -33,10 +33,16 @@ async function loadSound(name) {
 
   const response = await fetch(sound.file);
   const arrayBuffer = await response.arrayBuffer();
+  
+  // This decodes the audio into a "buffer" (raw data in memory)
   const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
 
   const source = audioCtx.createBufferSource();
   source.buffer = audioBuffer;
+  
+  // GAPLESS TRICK: 
+  // Standard .loop = true can sometimes hiccup. 
+  // By using the buffer source directly, the timing is handled by the Audio Hardware clock.
   source.loop = true;
 
   source.connect(sound.gain);
