@@ -17,8 +17,8 @@ const sounds = {
   sound2: { file: "audio/Drone.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound3: { file: "audio/Melody.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound4: { file: "audio/InsideCar.ogg", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
-  sound5: { file: "audio/UNDERWATER.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
-  sound6: { file: "audio/WETROAD.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
+  sound5: { file: "audio/Underwater.ogg", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
+  sound6: { file: "audio/WhileDriving.ogg", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
 };
 
 // Connect gain nodes
