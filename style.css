@@ -69,6 +69,24 @@ html, body {
   100% { transform: scale(1); }
 }
 
+/* The "Paused" Animation */
+@keyframes pulseOpacity {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* This class will be added/removed by JavaScript */
+.timer-paused {
+  animation: pulseOpacity 2s ease-in-out infinite;
+  color: #ff8fb0 !important; /* Optional: turn the numbers slightly pink/rose when paused */
+}
+
+/* Style for the Pause button to make it distinct */
+#pause {
+  border-color: #9e8778;
+}
+
 /* Update: All buttons now have smooth transitions */
 button {
   background: none;
