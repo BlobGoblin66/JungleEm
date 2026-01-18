@@ -70,7 +70,8 @@ const musicFiles = [
   "audio/Train.ogg",
   "audio/Weirder.ogg",
   "audio/Yikes.ogg"
-
+];
+  
 let currentPlaylist = [];
 let currentTrackIndex = 0;
 let musicSource = null;
