@@ -97,6 +97,8 @@ button {
   border-radius: 6px;
   transition: all 0.3s ease;
   font-family: 'Space Grotesk', sans-serif;
+  min-width: 100px; /* Forces all buttons to be at least this wide */
+  text-align: center; /* Ensures the text stays centered */
 }
 
 /* Hover effect for all buttons */
