@@ -13,7 +13,7 @@ notificationAudio.volume = 0.8;
 // MODULAR SOUND DEFINITIONS
 // ===============================
 const sounds = {
-  sound1: { file: "audio/RunningWater.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
+  sound1: { file: "audio/River.ogg", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound2: { file: "audio/Drone.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound3: { file: "audio/Melody.mp3", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
   sound4: { file: "audio/InsideCar.ogg", source: null, gain: audioCtx.createGain(), loaded: false, volume: 0.4 },
