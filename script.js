@@ -226,6 +226,43 @@ updateDisplay();
 // ===============================
 // BUTTON CLICK HANDLERS
 // ===============================
+
+// ===============================
+// MODE SELECTOR LOGIC (25/5, 40/5)
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const modeButtons = document.querySelectorAll(".mode-selector button");
+
+  // Highlight the first button by default
+  modeButtons[0].classList.add("active");
+
+  modeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // 1. Visual change: Move the glow to the clicked button
+      modeButtons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      // 2. Update the logic minutes
+      workMinutes = Number(button.dataset.work);
+      breakMinutes = Number(button.dataset.break);
+
+      // 3. Reset everything for a fresh start
+      isWorkSession = true;
+      phaseEl.textContent = "Focus";
+      document.body.classList.remove("break-mode");
+      timeRemaining = workMinutes * 60;
+      
+      // 4. Kill any running timer so they don't overlap
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timeEl.classList.remove("timer-paused");
+      document.getElementById("pause").textContent = "Pause";
+
+      updateDisplay();
+    });
+  });
+});
+
 // 1. THE SHARED TIMER LOGIC (The "Engine")
 function startTimer() {
   if (timerInterval) return; // Prevent "double-timing"
