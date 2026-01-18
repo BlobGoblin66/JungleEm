@@ -85,6 +85,16 @@
     <input type="range" min="0" max="1" step="0.01" value="0.4"
            onchange="setVolume('sound6', this.value)">
   </div>
+
+  <div class="sound-control">
+  <label class="toggle">
+    <input type="checkbox" onchange="toggleShuffleMusic(this.checked)">
+    <span class="slider"></span>
+    <span class="label-text">Inspiration</span>
+  </label>
+  <input type="range" min="0" max="1" step="0.01" value="0.4"
+         onchange="musicGain.gain.setTargetAtTime(this.value, audioCtx.currentTime, 0.1)">
+</div>
   
 </div>
 
