@@ -226,39 +226,9 @@ updateDisplay();
 // ===============================
 // BUTTON CLICK HANDLERS
 // ===============================
-document.addEventListener("DOMContentLoaded", () => {
-  const modeButtons = document.querySelectorAll(".mode-selector button");
-
-  // Highlight the default button (25/5)
-  modeButtons[0].classList.add("active");
-
-  modeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      // 1. Visual change: Move the glow to the clicked button
-      modeButtons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      // 2. Logic change: Update the minutes based on the button's data tags
-      workMinutes = Number(button.dataset.work);
-      breakMinutes = Number(button.dataset.break);
-
-      // 3. Reset the timer to the new start time
-      isWorkSession = true;
-      phaseEl.textContent = "Focus";
-      document.body.classList.remove("break-mode");
-      timeRemaining = workMinutes * 60;
-      
-      // 4. Stop any running timer so it doesn't act weird
-      clearInterval(timerInterval);
-      timerInterval = null;
-
-      updateDisplay();
-    });
-  });
-});
-
-document.getElementById("start").addEventListener("click", () => {
-  if (timerInterval) return; // Prevent multiple timers running at once
+// 1. THE SHARED TIMER LOGIC (The "Engine")
+function startTimer() {
+  if (timerInterval) return; // Prevent "double-timing"
 
   timerInterval = setInterval(() => {
     timeRemaining--;
@@ -266,35 +236,61 @@ document.getElementById("start").addEventListener("click", () => {
     if (timeRemaining < 0) {
       notificationAudio.play();
       isWorkSession = !isWorkSession;
-    if (isWorkSession) {
+      
+      // Toggle Visuals
+      if (isWorkSession) {
           document.body.classList.remove("break-mode");
           phaseEl.textContent = "Focus";
       } else {
           document.body.classList.add("break-mode");
           phaseEl.textContent = "Break";
       }
-
       timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
     }
-
     updateDisplay();
   }, 1000);
+}
+
+// 2. START BUTTON
+document.getElementById("start").addEventListener("click", () => {
+  timeEl.classList.remove("timer-paused"); 
+  document.getElementById("pause").textContent = "Pause";
+  startTimer();
 });
 
+// 3. PAUSE/RESUME BUTTON
+document.getElementById("pause").addEventListener("click", function() {
+  if (timerInterval) {
+    // Action: Pause
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timeEl.classList.add("timer-paused");
+    this.textContent = "Resume";
+  } else if (timeRemaining > 0) {
+    // Action: Resume
+    timeEl.classList.remove("timer-paused");
+    this.textContent = "Pause";
+    startTimer();
+  }
+});
+
+// 4. STOP BUTTON
 document.getElementById("stop").addEventListener("click", () => {
-  // 1. Stop the clock
+  // Stop the clock
   clearInterval(timerInterval);
   timerInterval = null;
+  
+  // Reset Display
   document.body.classList.remove("break-mode");
-
-  // 2. Reset the time display
   timeRemaining = (isWorkSession ? workMinutes : breakMinutes) * 60;
+  timeEl.classList.remove("timer-paused");
+  document.getElementById("pause").textContent = "Pause";
   updateDisplay();
 
-  // 3. Fade out the audio engine
+  // Silence Audio
   fadeAllOut();
 
-  // 4. NEW: Find all checkboxes and uncheck them
+  // Reset Toggles
   const toggles = document.querySelectorAll('#sound-panel input[type="checkbox"]');
   toggles.forEach(checkbox => {
     checkbox.checked = false;
