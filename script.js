@@ -6,7 +6,7 @@ const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 // ===============================
 // NOTIFICATION SOUND
 // ===============================
-const notificationAudio = new Audio("audio/notification.mp3");
+const notificationAudio = new Audio("audio/Notification.wav");
 notificationAudio.volume = 0.8;
 
 // ===============================
